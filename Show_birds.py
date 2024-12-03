@@ -10,8 +10,8 @@ Y = 800
 scrn = pygame.display.set_mode((X, Y))
 pygame.display.set_caption('image')
 
-imparr= [pygame.image.load("C:\\Users\\hecto\\OneDrive\\Documents\\PYthon\\DEV_Club\\angry_BIRDS\\Red_Bird.png").convert(), 
-         pygame.image.load("C:\\Users\\hecto\\OneDrive\\Documents\\PYthon\\DEV_Club\\angry_BIRDS\\Yellow_Bird.png").convert()]
+imparr= [pygame.image.load("Red_Bird.png").convert(), 
+         pygame.image.load("Yellow_Bird.png").convert()]
 
 rects=[]
 for img in imparr: 
