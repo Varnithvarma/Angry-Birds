@@ -57,6 +57,16 @@ Back_ground1 = pygame.transform.scale(Back_ground1, (WIDTH,HEIGHT))
 screen.blit(Back_ground1, (0,0))
 screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
 
+def move_bird(keys, bird_select, Red_draw_width, Red_draw_height):
+    if keys[pygame.K_LEFT] and Red_draw_width > 0:
+        Red_draw_width -= 2 
+    if keys[pygame.K_RIGHT] and Red_draw_width < WIDTH - birds_width[bird_select]: 
+        Red_draw_width += 2
+    if keys[pygame.K_UP] and Red_draw_height > 0:  
+        Red_draw_height -= 2
+    if keys[pygame.K_DOWN] and Red_draw_height < minimum_height - birds_height[bird_select]: 
+        Red_draw_height += 2
+    return Red_draw_width, Red_draw_height
 
 while run:
     # Will update the game certain times a second, in this case 120 times
@@ -64,25 +74,10 @@ while run:
 
     # Saves the pressed key
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and Red_draw_width > 0:
-        screen.blit(Back_ground1, (0,0))
-        Red_draw_width -= 2 
-        screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
-
-    if keys[pygame.K_RIGHT] and Red_draw_width < WIDTH - birds_width[bird_select]: 
-        screen.blit(Back_ground1, (0,0))
-        Red_draw_width += 2
-        screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
-         
-    if keys[pygame.K_UP] and Red_draw_height > 0:  
-        screen.blit(Back_ground1, (0,0))
-        Red_draw_height -= 2
-        screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
-          
-    if keys[pygame.K_DOWN] and Red_draw_height < minimum_height - birds_height[bird_select]: 
-        screen.blit(Back_ground1, (0,0)) 
-        Red_draw_height += 2
-        screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
+    Red_draw_width, Red_draw_height = move_bird(keys, bird_select, Red_draw_width, Red_draw_height)
+    
+    screen.blit(Back_ground1, (0,0))
+    screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
 
     # Did the user click the window close button?
     for event in pygame.event.get():
