@@ -68,16 +68,28 @@ def move_bird(keys, bird_select, Red_draw_width, Red_draw_height):
         Red_draw_height += 2
     return Red_draw_width, Red_draw_height
 
+def get_random_bird():
+    bird_select = random.randint(0, (len(birds) - 1))
+    bird = pygame.transform.scale(birds[bird_select], (birds_width[bird_select], birds_height[bird_select]))
+    return bird_select, bird
+
+bird_select, bird = get_random_bird()
+
 while run:
     # Will update the game certain times a second, in this case 120 times
     clock.tick(FPS)
 
     # Saves the pressed key
     keys = pygame.key.get_pressed()
+
+    # Check if the bird is used or dies (example condition, you can replace it with actual game logic)
+    if keys[pygame.K_SPACE]:  # Example condition to change the bird
+        bird_select, bird = get_random_bird()
+
     Red_draw_width, Red_draw_height = move_bird(keys, bird_select, Red_draw_width, Red_draw_height)
     
     screen.blit(Back_ground1, (0,0))
-    screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
+    screen.blit(bird, (Red_draw_width, Red_draw_height))
 
     # Did the user click the window close button?
     for event in pygame.event.get():
