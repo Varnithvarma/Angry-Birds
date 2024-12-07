@@ -9,9 +9,12 @@ import numpy as np
 HEIGHT = 800
 WIDTH = 1200
 
-# Red's starting positions and its size
-Red_draw_height = (HEIGHT/2) 
-Red_draw_width = (WIDTH/2) 
+# Red's starting positions
+position_x = 50
+position_y = HEIGHT - 100
+
+velocity_x = 15
+velocity_y = -15
 
 # Minimum height for map 1
 minimum_height = 697
@@ -42,7 +45,7 @@ birds_flight_time = np.array([4])
 bird_select = random.randint(0,(len(birds)-1))
 
 # Here are some variables that use the module time. They will be used later to constantly update the game
-FPS = 120
+FPS = 60
 run = True
 clock = pygame.time.Clock()
 
@@ -55,18 +58,34 @@ Back_ground1 = pygame.transform.scale(Back_ground1, (WIDTH,HEIGHT))
 
 # Prints our Space Ship on the screen
 screen.blit(Back_ground1, (0,0))
-screen.blit(birds[bird_select], (Red_draw_width, Red_draw_height))
+screen.blit(birds[bird_select], (position_x, position_y))
 
-def move_bird(keys, bird_select, Red_draw_width, Red_draw_height):
-    if keys[pygame.K_LEFT] and Red_draw_width > 0:
-        Red_draw_width -= 2 
-    if keys[pygame.K_RIGHT] and Red_draw_width < WIDTH - birds_width[bird_select]: 
-        Red_draw_width += 2
-    if keys[pygame.K_UP] and Red_draw_height > 0:  
-        Red_draw_height -= 2
-    if keys[pygame.K_DOWN] and Red_draw_height < minimum_height - birds_height[bird_select]: 
-        Red_draw_height += 2
-    return Red_draw_width, Red_draw_height
+
+""""
+hi, it's me, Devin.
+I've commented out this code since we've added more variables to make the physics work
+trying to do this in a function is nice to split the code into parts
+but *in my opinion*, it's kind of a mess due to scope
+
+in the future, look into creating a bird Object if you want to organize the code better
+"""
+
+"""
+def move_bird(keys, bird_select, position_x, position_y, velocity_x, velocity_y):
+    if keys[pygame.K_LEFT] and position_x > 0:
+        position_x -= 2 
+    if keys[pygame.K_RIGHT] and position_x < WIDTH - birds_width[bird_select]: 
+        position_x += 2
+    if keys[pygame.K_UP] and position_y > 0:  
+        position_y -= 2
+    if keys[pygame.K_DOWN] and position_y < minimum_height - birds_height[bird_select]: 
+        position_y += 2
+    velocity_y += 1
+
+    position_x += velocity_x
+    position_y += velocity_y
+    return position_x, position_y
+"""
 
 def get_random_bird():
     bird_select = random.randint(0, (len(birds) - 1))
@@ -86,10 +105,20 @@ while run:
     if keys[pygame.K_SPACE]:  # Example condition to change the bird
         bird_select, bird = get_random_bird()
 
-    Red_draw_width, Red_draw_height = move_bird(keys, bird_select, Red_draw_width, Red_draw_height)
+    #position_x, position_y = move_bird(keys, bird_select, position_x, position_y, velocity_x, velocity_y)
+
+    # UPDATING GAME STATE
+
+    # change bird velocity
+    velocity_y += 0.4
+
+    # change bird position
+    position_x += velocity_x
+    position_y += velocity_y
+
     
     screen.blit(Back_ground1, (0,0))
-    screen.blit(bird, (Red_draw_width, Red_draw_height))
+    screen.blit(bird, (position_x, position_y))
 
     # Did the user click the window close button?
     for event in pygame.event.get():
