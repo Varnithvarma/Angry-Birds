@@ -22,6 +22,7 @@ minimum_height = 697
 # Set up the drawing window
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 
+Score=0 #shows the over all score 
 # Importing the background
 Back_ground1 = pygame.image.load(os.path.join("Backgrounds", "Background1.jpg"))
 Back_ground2 = pygame.image.load(os.path.join("Backgrounds", "Background2.jpg"))
@@ -35,17 +36,12 @@ Boomerang = pygame.image.load(os.path.join("Characters", "Boomerang.png"))
 Egg_man = pygame.image.load(os.path.join("Characters", "Egg man.png"))
 Chuck = pygame.image.load(os.path.join("Characters", "Chuck.png"))
 
-#notsure what is better but im making the pigs as arrays since they have mutli states for the armored pig- Hector 
-Armored_pig= [pygame.image.load(os.path.join("Characters","Armored Pig.png")), pygame.image.load(os.path.join("Characters","Damaged Armored Pig.png"))]
-King_pig=pygame.image.load(os.path.join("Characters","King Pig.png"))
-Moustache_pig= [pygame.image.load(os.path.join("Characters","Moustache Pig.png")), pygame.image.load(os.path.join("Characters","Sleepy Pig.pmg"))]
-Norm_pig==pygame.image.load(os.path.join("Characters","Normal Pig.png"))
-
 # Arrays for all the information 
 birds = np.array([Red,Baby_bird,Bomb,Big_bird,Boomerang,Egg_man,Chuck])
 birds_height = np.array([36,24,65,74,57,70,44])
 birds_width = np.array([36,24,47,77,76,62,45])
 birds_flight_time = np.array([4])
+
 
 # This will give you a random bird
 bird_select = random.randint(0,(len(birds)-1))
@@ -66,8 +62,34 @@ Back_ground1 = pygame.transform.scale(Back_ground1, (WIDTH,HEIGHT))
 screen.blit(Back_ground1, (0,0))
 screen.blit(birds[bird_select], (position_x, position_y))
 
+"""
+#dont want to impiment this yet want to run it by you guys first- Hec
+#notsure what is better but im making the pigs as arrays since they have mutli states for the armored pig- Hector 
+Armored_pig= [pygame.image.load(os.path.join("Characters","Armored Pig.png")), pygame.image.load(os.path.join("Characters","Damaged Armored Pig.png"))]
+King_pig=pygame.image.load(os.path.join("Characters","King Pig.png"))
+Moustache_pig= [pygame.image.load(os.path.join("Characters","Moustache Pig.png")), pygame.image.load(os.path.join("Characters","Sleepy Pig.pmg"))]
+Norm_pig=pygame.image.load(os.path.join("Characters","Normal Pig.png"))
 
-""""
+#left the width and heigh values blank since dont know the scale of the map
+pigs= np.array([Armored_pig,King_pig,Moustache_pig,Norm_pig])
+pigs_width=np.array([,,,])
+pigs_height=np.array([,,,])
+
+#depends how many pigs we add 
+Pig_x= np.array([])
+pig_y=np.array([])
+
+"""
+
+"""THought Process-Hector
+
+so since the bird is moving after its launced and im assuming the x pos is the top left corner of the image so i have to add the image length
+and chech to see if the image length is inbetween the pigs x position and x postion+lenth as well as the Y postion and Y postion + width 
+and then there are the destuctible objects that we have to worry about as well. 
+"""
+
+
+"""
 hi, it's me, Devin.
 I've commented out this code since we've added more variables to make the physics work
 trying to do this in a function is nice to split the code into parts
@@ -91,6 +113,7 @@ def move_bird(keys, bird_select, position_x, position_y, velocity_x, velocity_y)
     position_x += velocity_x
     position_y += velocity_y
     return position_x, position_y
+
 """
 
 def get_random_bird():
