@@ -35,6 +35,12 @@ Boomerang = pygame.image.load(os.path.join("Characters", "Boomerang.png"))
 Egg_man = pygame.image.load(os.path.join("Characters", "Egg man.png"))
 Chuck = pygame.image.load(os.path.join("Characters", "Chuck.png"))
 
+#notsure what is better but im making the pigs as arrays since they have mutli states for the armored pig- Hector 
+Armored_pig= [pygame.image.load(os.path.join("Characters","Armored Pig.png")), pygame.image.load(os.path.join("Characters","Damaged Armored Pig.png"))]
+King_pig=pygame.image.load(os.path.join("Characters","King Pig.png"))
+Moustache_pig= [pygame.image.load(os.path.join("Characters","Moustache Pig.png")), pygame.image.load(os.path.join("Characters","Sleepy Pig.pmg"))]
+Norm_pig==pygame.image.load(os.path.join("Characters","Normal Pig.png"))
+
 # Arrays for all the information 
 birds = np.array([Red,Baby_bird,Bomb,Big_bird,Boomerang,Egg_man,Chuck])
 birds_height = np.array([36,24,65,74,57,70,44])
